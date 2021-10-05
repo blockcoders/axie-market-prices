@@ -3,23 +3,23 @@ const schedule = require('node-schedule')
 const { updateActivity, scheduleRule } = require('./utils')
 
 const client = new Discord.Client({ intents:[] });
-client.login(process.env.ETH_BOT_TOKEN);
+client.login(process.env.SUSHI_BOT_TOKEN);
 
 const updateClient = async () => {
-  console.info('Bot ETH ready.')
+  console.info('Bot SUSHI ready.')
   
   const promises = []
 
   try {
     client.guilds.cache.each((guild) => {
       const bot = guild.members.cache.first()
-      const role = guild.roles.cache.find((role) => role.name === 'ETH Price')
+      const role = guild.roles.cache.find((role) => role.name === 'SUSHI Price')
       const user = client.user;
       
-      promises.push(updateActivity('ETH', user, bot, role))
+      promises.push(updateActivity('SUSHI', user, bot, role))
       
       schedule.scheduleJob(scheduleRule, async () => {
-        await updateActivity('ETH', user, bot, role)
+        await updateActivity('SUSHI', user, bot, role)
       })
     })
 
